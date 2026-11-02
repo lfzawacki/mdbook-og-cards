@@ -1,0 +1,17 @@
+<!--
+  Reference template for the HTML produced by mdbook-og-cards.
+  The actual renderer (src/renderer.rs) builds this string directly in Rust
+  for zero runtime templating overhead; this file exists purely as
+  documentation of the exact structure/classes you can target with custom
+  CSS. Editing this file has no effect on the generated output.
+-->
+<a class="og-card" href="{{url}}" target="_blank" rel="noopener noreferrer">
+  <div class="og-card-content">
+    <img src="{{image}}" alt="" loading="lazy">
+    <div>
+      <strong>{{title}}</strong>
+      <p>{{description}}</p>
+      <small>{{site_name}}</small>
+    </div>
+  </div>
+</a>
