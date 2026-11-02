@@ -59,15 +59,13 @@ command = "mdbook-og-cards"
 renderers = ["html"]
 ```
 
-And include the stylesheet:
+And include the stylesheet (referencing it directly keeps a single source
+of truth; copying it into your book's `theme/` directory also works):
 
 ```toml
 [output.html]
-additional-css = ["theme/og-cards.css"]
+additional-css = ["mdbook-og-cards/styles/og-cards.css"]
 ```
-
-(copy `styles/og-cards.css` from this crate into your book's `theme/`
-directory, or reference it directly).
 
 ### Options
 
@@ -140,11 +138,17 @@ a plain `<a href="...">` — a failed fetch never breaks the build.
 
 ## CSS customization
 
-`styles/og-cards.css` defines a `.og-card` / `.og-card-content` structure
-with a responsive image-left/image-top layout and respects mdBook's
-default theme variables (works with light and dark themes). Override or
-replace it freely; the generated markup intentionally has no inline
-styles.
+`styles/og-cards.css` styles the `.og-card` flex container, the
+`.og-card-image` thumbnail, and the `.og-card-body` / `.og-card-title` /
+`.og-card-description` / `.og-card-source` text column. It switches from
+an image-left layout to image-top at `480px` and respects mdBook's default
+theme variables (works with light and dark themes).
+
+The generated markup uses only inline/phrasing elements (`a`, `img`,
+`span`, `strong`, `small`) because cards are often spliced into a
+paragraph; block-level tags would make the HTML5 parser close the
+paragraph and mangle the DOM. Override or replace the stylesheet freely —
+the generated markup intentionally has no inline styles.
 
 ## Development
 
